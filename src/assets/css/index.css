@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  @apply bg-white text-gray-900 duration-300 ease-in-out;
+}
+
+:root.dark {
+  @apply bg-brand-dark text-white;
+}
+
+/* Custom Utilities */
+.glass {
+  @apply bg-white/70 dark:bg-brand-surface/70 backdrop-blur-lg border border-white/20 dark:border-white/10 shadow-xl;
+}
+
+.mesh-bg {
+  background-color: #ffffff;
+  background-image:
+    radial-gradient(at 0% 0%, hsla(160, 84%, 40%, 0.15) 0, transparent 50%),
+    /* Emerald-ish */
+    radial-gradient(at 50% 0%, hsla(260, 90%, 65%, 0.15) 0, transparent 50%),
+    /* Violet-ish */
+    radial-gradient(at 100% 0%, hsla(45, 95%, 55%, 0.15) 0, transparent 50%);
+  /* Amber-ish */
+}
+
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-primary via-brand-secondary to-brand-accent font-bold;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: fadeIn 0.7s ease-out forwards;
+}
+
+@keyframes progressLoad {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+.animate-progress {
+  animation: progressLoad 1.5s ease-out forwards;
+}
+
+.hover-trigger .hover-target {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.hover-trigger:hover .hover-target {
+  opacity: 1;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100 dark:bg-slate-900 border-l border-gray-200 dark:border-white/5;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-400 dark:bg-slate-700 rounded-full border-[3px] border-solid border-gray-100 dark:border-slate-900;
+  transition: background-color 0.3s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-brand-primary;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #94a3b8 #0f172a;
+}
+
+.dark * {
+  scrollbar-color: #334155 #0f172a;
+}

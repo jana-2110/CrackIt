@@ -1,0 +1,54 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    function isAdmin() {
+      return request.auth != null && request.auth.token.admin == true;
+    }
+    
+    function isOwner(userId) {
+      return request.auth != null && request.auth.uid == userId;
+    }
+
+    // Questions Collection 
+    match /questions/{questionId} {
+      allow read: if request.auth != null;
+      allow write: if isAdmin();
+    }
+    
+    // Tests Collection (For TestManager)
+    match /tests/{testId} {
+      allow read: if request.auth != null;
+      allow write: if isAdmin();
+    }
+
+    // Users Collection
+    match /users/{userId} {
+      allow read, write: if isOwner(userId) || isAdmin();
+      
+      match /testResults/{resultId} {
+        allow read, write: if isOwner(userId) || isAdmin();
+      }
+    }
+
+    // Collection Group Query for testResults (Admin only)
+    match /{path=**}/testResults/{resultId} {
+      allow read: if isAdmin();
+    }
+    
+    // Leaderboard
+    match /leaderboard/{userId} {
+      allow read: if request.auth != null;
+      allow write: if isOwner(userId) || isAdmin();
+    }
+    
+    // Admin-only collections
+    match /admin_settings/{docId} {
+      allow read, write: if isAdmin();
+    }
+    
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
