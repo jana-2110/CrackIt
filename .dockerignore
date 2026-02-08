@@ -1,0 +1,14 @@
+node_modules
+dist
+build
+.git
+.gitignore
+.env
+.env.*
+backend/node_modules
+backend/.env
+backend/serviceAccountKey.json
+backend/serviceAccountKey.json.json
+Dockerfile
+docker-compose.yml
+README.md

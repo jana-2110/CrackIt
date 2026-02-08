@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=production
+      # Add other environment variables here if needed, or use env_file
+    # env_file:
+    #   - .env # Be careful with secrets in .env files committed to repo
